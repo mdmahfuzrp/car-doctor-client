@@ -1,0 +1,8 @@
+#bannerImg.image-full:before{
+    background: linear-gradient(90deg, #151515 0%, rgba(21, 21, 21, 0) 100%);
+}
+#banner-route{
+    transform: translate(50%);
+    border-top-left-radius: 150px;
+    border-top-right-radius: 150px;
+}
