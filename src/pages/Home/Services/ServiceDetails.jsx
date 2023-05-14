@@ -1,14 +1,13 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Banner from '../../../Shared/Banner/Banner';
 import bannerImg from '../../../assets/images/banner/4.jpg';
-import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight, FaFileInvoice } from 'react-icons/fa';
+import logo from '../../../assets/light-logo.png';
 
 const ServiceDetails = () => {
     const service = useLoaderData();
-    const { img, title, description, facility } = service;
-    console.log(service);
-    console.log(service);
+    const { _id, img, title, description, facility, price } = service;
     return (
         <div>
             {/* Banner */}
@@ -26,13 +25,13 @@ const ServiceDetails = () => {
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-y-5 gap-x-6'>
                         {
                             facility.map((f, index) => <div
-                            key={index}
-                            className="card bg-[#f3f3f35e] border-t-4 shadow-sm border-error">
-                                    <div className="card-body">
-                                        <h2 className="card-title text-[#444444]">{f.name}</h2>
-                                        <p className='text-[#737373]'>{f.details}</p>
-                                    </div>
-                                </div>)
+                                key={index}
+                                className="card bg-[#f3f3f35e] border-t-4 shadow-sm border-error">
+                                <div className="card-body">
+                                    <h2 className="card-title text-[#444444]">{f.name}</h2>
+                                    <p className='text-[#737373]'>{f.details}</p>
+                                </div>
+                            </div>)
                         }
                     </div>
                     <h1 className='text-xl sm:text-3xl md:text-4xl font-bold'>3 Simple Steps to Process</h1>
@@ -76,13 +75,45 @@ const ServiceDetails = () => {
                         <iframe width="100%" height="500px" src="https://www.youtube.com/embed/VTDB3mKx7jM" title="YouTube video player" allow="web-share" allowFullScreen></iframe>
                     </div>
                 </div>
-
                 {/* Right Side Details */}
-                <div className=''>
-                    <div>
-                        <div>
-                            <span></span>
+                <div className='space-y-7'>
+                    <div className='p-5 rounded-xl bg-[#151515]'>
+                        <h1 className='text-[25px] text-white'>Download</h1>
+                        <div className='flex justify-between w-full items-center mt-5 mb-3'>
+                            <div className='flex items-center justify-start'>
+                                <span className='text-white'><FaFileInvoice size={21} /></span>
+                                <div className='ms-3'>
+                                    <h1 className='text-[18px] text-white'>Our Brochure</h1>
+                                    <p className='text-[16px] text-[#A2A2A2]'>Download</p>
+                                </div>
+                            </div>
+                            <div className='bg-error p-2 rounded-md cursor-pointer'><span className='text-white'><FaArrowRight size={17} /></span></div>
                         </div>
+                        <div className='flex justify-between w-full items-center'>
+                            <div className='flex items-center justify-start'>
+                                <span className='text-white'><FaFileInvoice size={21} /></span>
+                                <div className='ms-3'>
+                                    <h1 className='text-[18px] text-white'>Our Brochure</h1>
+                                    <p className='text-[16px] text-[#A2A2A2]'>Download</p>
+                                </div>
+                            </div>
+                            <div className='bg-error p-2 rounded-md cursor-pointer'><span className='text-white'><FaArrowRight size={17} /></span></div>
+                        </div>
+                    </div>
+                    <div className='p-5 rounded-xl bg-[#151515] flex flex-col items-center'>
+                        <img className='w-24' src={logo} alt="" />
+                        <p className='text-[18px] text-center text-white mt-3'>Need Help? We Are Here To Help You</p>
+                        <div className='flex justify-center w-full items-center mt-5 mb-3'>
+                            <div className='bg-white rounded-lg p-4 py-5 pb-10'>
+                                <h1 className='text-[18px] text-black font-medium text-center'>Car Doctor Special</h1>
+                                <p className='text-[16px] text-[#535252] text-center'>Save up to <span className='text-black'>60%</span> off</p>
+                            </div>
+                        </div>
+                        <button className='btn btn-error -mt-10 text-white'>Get A Quote</button>
+                    </div>
+                    <div>
+                        <h1 className='font-bold text-[35px]'>Price: ${price}</h1>
+                        <Link to={`/checkout/${_id}`} className='btn btn-error text-white w-full rounded-none'>Proceed Checkout</Link>
                     </div>
                 </div>
             </div>

@@ -31,7 +31,7 @@ const Profile = () => {
                 <p>{user.email}</p>
                 <div className='flex'>
                     <button onClick={handleLogout} className='m-1 btn btn-outline btn-error'>Logout</button>
-                    <Link onClick={handleLogout} className='m-1 btn btn-outline btn-error'>Home</Link>
+                    <Link to='/' className='m-1 btn btn-outline btn-error'>Home</Link>
                 </div>
             </div>
         </div>

@@ -6,38 +6,58 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const signUp = (email, password)=>{
+    const signUp = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
-    const login = (email, password) =>{
+    const login = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
-    const googleLogin = () =>{
+    const googleLogin = () => {
         return signInWithPopup(auth, googleProvider);
     }
-    const githubLogin = () =>{
+    const githubLogin = () => {
         return signInWithPopup(auth, githubProvider);
     }
 
-    useEffect(()=>{
-        const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            console.log(currentUser);
             setLoading(false);
+            if (currentUser && currentUser.uid) {
+                const userInfo = {
+                    email: currentUser.email
+                }
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        const token = data.token;
+                        // Local storage is not best option but it's second best
+                        localStorage.setItem('car-access-token', token);
+                    });
+            }
+            else {
+                localStorage.removeItem('car-access-token');
+            }
         });
-        return ()=>{
+        return () => {
             return unsubscribe();
         }
-    },[])
+    }, [])
 
 
-    const logout = () =>{
+    const logout = () => {
         return signOut(auth);
     }
 

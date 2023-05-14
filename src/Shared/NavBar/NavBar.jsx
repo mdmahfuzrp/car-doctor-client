@@ -26,6 +26,10 @@ const NavBar = () => {
     const listItem = <>
         <li><Link className='btn btn-ghost text-black' to='/'>Home</Link></li>
         <li><Link className='btn btn-ghost text-black' to='/about'>About</Link></li>
+        {
+            user && 
+            <li><Link className='btn btn-ghost text-black' to='/checkout'>My Bookings</Link></li>
+        }
     </>
     return (
         <div className=''>

@@ -7,7 +7,7 @@ const About = () => {
             <div className='md:w-1/2 h-full md:mt-10'>
                 <div className='h-full relative mb-5 md:mb-0'>
                     <img src={person} className='w-3/4 rounded-xl' alt="Person" />
-                    <img src={parts} className='absolute w-2/4 top-1/2 right-0 md:right-10 rounded-xl border-8 border-white' alt="" />
+                    <img src={parts} className='absolute w-2/4 top-1/2 right-0 md:right-10 rounded-xl border-8 border-white shadow-lg' alt="" />
                 </div>
             </div>
             <div className="card-body md:w-1/2">
